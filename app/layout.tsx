@@ -4,9 +4,6 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Авторська програма — Кіра Сиротенко",
   description: "Терапевтична група «Вигорання в епоху когнітивного перевантаження».",
-  other: {
-    "codex-preview": "development",
-  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
