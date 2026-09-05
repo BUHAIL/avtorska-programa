@@ -6,7 +6,9 @@ import { sites } from "./build/sites-vite-plugin";
 // uploader can omit dot-directories, so the build must not import .openai.
 const d1 = "DB";
 const r2: string | null = null;
-const d1DatabaseId = process.env.CLOUDFLARE_D1_DATABASE_ID?.trim();
+const d1DatabaseId =
+  process.env.CLOUDFLARE_D1_DATABASE_ID?.trim() ||
+  "0c7bb18d-0415-48d8-a8df-d56346aa0c66";
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";

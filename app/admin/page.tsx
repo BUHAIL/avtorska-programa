@@ -28,7 +28,7 @@ export default function AdminPage() {
   const [status, setStatus] = useState<"loading" | "ready" | "unauthorized" | "forbidden" | "error">("loading");
 
   useEffect(() => {
-    fetch("/api/admin/applications", { cache: "no-store" })
+    fetch("/admin/api/applications", { cache: "no-store" })
       .then(async (response) => {
         if (response.status === 401) return setStatus("unauthorized");
         if (response.status === 403) return setStatus("forbidden");
@@ -45,11 +45,11 @@ export default function AdminPage() {
   }
 
   if (status === "unauthorized") {
-    return <main className="admin-page admin-message"><p className="kicker">Закритий розділ</p><h1>Увійдіть, щоб переглянути заявки.</h1><a href="/signin-with-chatgpt?return_to=%2Fadmin" target="_top">Увійти через ChatGPT</a></main>;
+    return <main className="admin-page admin-message"><p className="kicker">Закритий розділ</p><h1>Cloudflare не підтвердив доступ.</h1><a href="/admin">Спробувати ще раз</a></main>;
   }
 
   if (status === "forbidden") {
-    return <main className="admin-page admin-message"><p className="kicker">Закритий розділ</p><h1>У цього акаунта немає доступу.</h1><a href="/signout-with-chatgpt?return_to=%2Fadmin">Увійти іншим акаунтом</a></main>;
+    return <main className="admin-page admin-message"><p className="kicker">Закритий розділ</p><h1>У цього акаунта немає доступу.</h1><a href="/cdn-cgi/access/logout">Увійти іншим акаунтом</a></main>;
   }
 
   if (status === "error") {
@@ -60,7 +60,7 @@ export default function AdminPage() {
     <main className="admin-page">
       <header className="admin-header">
         <div><p className="kicker">Адміністрування</p><h1>Заявки на курс</h1></div>
-        <nav><a href="/">На сайт</a><a href="/signout-with-chatgpt?return_to=%2F">Вийти</a></nav>
+        <nav><a href="/">На сайт</a><a href="/cdn-cgi/access/logout">Вийти</a></nav>
       </header>
       <p className="admin-count">Усього заявок: <strong>{applications.length}</strong></p>
       {applications.length === 0 ? (
